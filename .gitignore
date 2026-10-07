@@ -1,0 +1,34 @@
+# Dependencias (backend y frontend)
+node_modules/
+*/node_modules/
+
+# Variables de entorno y secretos (obligatorio por rúbrica)
+.env
+.env.local
+.env.*.local
+*.env
+!.env.example
+
+# Carpetas del editor (como la carpeta .vscode que aparece en tu captura)
+.vscode/
+*/.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+
+# Compilaciones y builds
+dist/
+dist-ssr/
+build/
+
+# Logs del sistema y gestores de paquetes
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
