@@ -6,13 +6,13 @@ const errorConexion = ref(false)
 
 onMounted(async () => {
   try {
-    const respuesta = await fetch('http://localhost:3000/api/health')
+    const respuesta = await fetch('http://localhost:8000/api/health')
     const datos = await respuesta.json()
     // Acepta 'mensaje', 'message' o pinta el JSON completo para que nunca quede vacío
     estadoBackend.value = datos.mensaje || datos.message || `Conectado: ${JSON.stringify(datos)}`
     errorConexion.value = false
   } catch (error) {
-    estadoBackend.value = 'Error al conectar con el Backend en http://localhost:3000'
+    estadoBackend.value = 'Error al conectar con el Backend en http://localhost:8000'
     errorConexion.value = true
   }
 })

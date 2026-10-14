@@ -10,8 +10,8 @@ Voy a utilizar **Tailwind CSS**.
 *Justificación:* Lo he elegido porque es el framework de utilidades CSS más demandado en la actualidad. Me permite un desarrollo de interfaces rápido y moderno sin tener que abandonar mis archivos de componentes, asegurando un diseño responsive con una curva de aprendizaje muy ágil.
 
 ### Backend
-Emplearé **Node.js con el framework Express**.
-*Justificación:* Express es un estándar en la industria por su ligereza y flexibilidad para construir APIs RESTful. Además, al usar JavaScript en el backend, unifico el lenguaje de programación con el frontend, lo que me reduce la curva de aprendizaje y optimiza el manejo de la asincronía necesaria para programar mi algoritmo de disponibilidad.
+Emplearé **Python 3 con el framework Django 5.2**.
+*Justificación:* Django ofrece una base sólida y estructurada para construir APIs y aplicaciones web, con herramientas integradas para el desarrollo rápido y seguro del sistema de reservas.
 
 ### Frontend
 Desarrollaré una SPA (Single Page Application) usando **Vue 3** junto con el empaquetador **Vite**.
@@ -54,15 +54,16 @@ Copia la plantilla de ejemplo para crear tu archivo `.env` local:
 cp .env.example .env
 ```
 *Variables a configurar:*
-* `PORT`: Puerto en el que correrá el backend de Express (por defecto: `3000`).
-* `VITE_API_URL`: URL base de la API consumida por el cliente (`http://localhost:3000/api`).
+* `PORT`: Puerto en el que correrá el backend de Django (por defecto: `8000`).
+* `VITE_API_URL`: URL base de la API consumida por el cliente (`http://localhost:8000/api`).
 
 ### 3. Instalar dependencias
 Instala los paquetes en ambas partes del proyecto:
 ```bash
-# Dependencias del backend
+# Dependencias del backend Django
 cd backend
-npm install
+.\env\Scripts\Activate.ps1
+pip install -r requirements.txt
 cd ..
 
 # Dependencias del frontend
@@ -78,9 +79,10 @@ cd ..
 En una terminal situada en la raíz del proyecto:
 ```bash
 cd backend
-node index.js
+.\env\Scripts\Activate.ps1
+python manage.py runserver
 ```
-El servidor quedará disponible en: `http://localhost:3000`.
+El servidor quedará disponible en: `http://localhost:8000`.
 
 ### 6. Arrancar el Frontend
 En una segunda terminal situada en la raíz del proyecto:
@@ -91,5 +93,5 @@ npm run dev
 La interfaz quedará disponible en: `http://localhost:5173`.
 
 ### 7. Comprobar funcionamiento
-1. Abre en tu navegador `http://localhost:3000/api/health` para ver la respuesta JSON directa del servidor (`status: OK`).
+1. Abre en tu navegador `http://localhost:8000/api/health` para ver la respuesta JSON directa del servidor (`status: OK`).
 2. Abre `http://localhost:5173` en el navegador: la aplicación de Vue cargará y mostrará una tarjeta verde con el mensaje recibido desde el backend en tiempo real, demostrando la comunicación bidireccional.
