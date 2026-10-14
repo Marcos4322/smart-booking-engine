@@ -32,3 +32,9 @@ pnpm-debug.log*
 # Archivos del sistema operativo
 .DS_Store
 Thumbs.db
+
+# Python / Django
+backend/env/
+backend/db.sqlite3
+backend/__pycache__/
+*.pyc
