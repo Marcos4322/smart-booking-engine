@@ -39,7 +39,7 @@ Thumbs.db
 __pycache__/
 db.sqlite3
 media/
-staticfiles/
+**/staticfiles/
 
 # Entornos virtuales
 venv/
