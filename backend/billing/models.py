@@ -12,8 +12,11 @@ class Cliente(models.Model):
     email = models.EmailField(unique=True, verbose_name="Correo electrónico")
 
     class Meta:
+        # UD3.4e - Configuracion de nombres
         verbose_name = "Cliente"
         verbose_name_plural = "Clientes"
+        # UD3.4f - Ordenación de clientes
+        ordering = ["apellidos", "nombre"]
 
     # # UD3.3b - Representación textual del modelo Cliente
     def __str__(self):
@@ -35,8 +38,11 @@ class Factura(models.Model):
     total = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name="Total (€)")
 
     class Meta:
+        # UD3.4e - Configuracion de nombres
         verbose_name = "Factura"
         verbose_name_plural = "Facturas"
+        # UD3.4f ordenación de facturas
+        ordering = ["numero_factura"]
 
     # # UD3.3b - Representación textual del modelo Factura
     def __str__(self):
@@ -55,8 +61,11 @@ class Cobro(models.Model):
     importe = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name="Importe (€)")
 
     class Meta:
+        # UD3.4e - Configuracion de nombres
         verbose_name = "Cobro"
         verbose_name_plural = "Cobros"
+        # UD3.4f - ordenación de cobros
+        ordering = ["-fecha"]
 
     # # UD3.3b - Representación textual del modelo Cobro
     def __str__(self):

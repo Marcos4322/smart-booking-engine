@@ -12,8 +12,10 @@ class Profesional(models.Model):
     activo = models.BooleanField(default=True, verbose_name="Activo")
 
     class Meta:
+        # UD3.4e - Configuracion de nombres
         verbose_name = "Profesional"
         verbose_name_plural = "Profesionales"
+        # UD3.4f - ordenación de cobros
         ordering = ["apellidos", "nombre"]
 
     # # UD3.3b - Representación textual del modelo Profesional
@@ -35,8 +37,10 @@ class Servicio(models.Model):
     activo = models.BooleanField(default=True, verbose_name="Activo")
 
     class Meta:
+        # UD3.4e - Configuracion de nombres
         verbose_name = "Servicio"
         verbose_name_plural = "Servicios"
+        # UD3.4f - ordenación de cobros
         ordering = ["nombre"]
 
     # # UD3.3b - Representación textual del modelo Servicio
@@ -67,8 +71,10 @@ class HorarioLaboral(models.Model):
     hora_fin = models.TimeField(verbose_name="Hora de fin")
 
     class Meta:
+        # UD3.4e - Configuracion de nombres
         verbose_name = "Horario laboral"
         verbose_name_plural = "Horarios laborales"
+        # UD3.4f - ordenación de cobros
         ordering = ["dia_semana", "hora_inicio"]
         # # UD3.3c - Restricción de clave única compuesta para evitar solapamientos
         unique_together = [("profesional", "dia_semana", "hora_inicio", "hora_fin")]
@@ -122,8 +128,10 @@ class Reserva(models.Model):
     fecha_creacion = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
 
     class Meta:
+        # UD3.4e - Configuracion de nombres
         verbose_name = "Reserva"
         verbose_name_plural = "Reservas"
+        # UD3.4f - ordenación de cobros
         ordering = ["-fecha_inicio"]
 
     # # UD3.3b - Representación textual del modelo Reserva
@@ -150,8 +158,10 @@ class BloqueoAgenda(models.Model):
     motivo = models.CharField(max_length=200, verbose_name="Motivo")
 
     class Meta:
+        # UD3.4e - Configuracion de nombres
         verbose_name = "Bloqueo de agenda"
         verbose_name_plural = "Bloqueos de agenda"
+        # UD3.4f - ordenación de cobros
         ordering = ["fecha_inicio"]
 
     # # UD3.3b - Representación textual del modelo BloqueoAgenda
