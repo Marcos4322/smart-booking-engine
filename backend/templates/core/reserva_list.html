@@ -1,0 +1,22 @@
+
+{% extends "common/base_intranet.html" %}
+
+{% block main_content %}
+<div class="container">
+    <h1>Lista de reservas</h1>
+
+    <ul class="list-group mt-3">
+        {% for reserva in object_list %}
+            <a href="{% url 'reserva_detail' pk=reserva.id %}"
+               class="list-group-item list-group-item-action">
+                {{ reserva }}
+            </a>
+        {% empty %}
+            <p>No existen reservas.</p>
+        {% endfor %}
+    </ul>
+
+    {% include "common/pagination.html" %}
+    
+</div>
+{% endblock main_content %}

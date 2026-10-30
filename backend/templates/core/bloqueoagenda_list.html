@@ -1,0 +1,22 @@
+
+{% extends "common/base_intranet.html" %}
+
+{% block main_content %}
+<div class="container">
+    <h1>Lista de bloqueos de agenda</h1>
+
+    <ul class="list-group mt-3">
+        {% for bloqueo in object_list %}
+            <a href="{% url 'bloqueoagenda_detail' pk=bloqueo.id %}"
+               class="list-group-item list-group-item-action">
+                {{ bloqueo }}
+            </a>
+        {% empty %}
+            <p>No existen bloqueos de agenda.</p>
+        {% endfor %}
+    </ul>
+
+    {% include "common/pagination.html" %}
+    
+</div>
+{% endblock main_content %}

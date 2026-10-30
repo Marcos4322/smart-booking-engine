@@ -1,0 +1,25 @@
+{% extends "common/base_intranet.html" %}
+
+{% comment %}{# UD3.8a - Plantilla de listado de profesionales #}{% endcomment %}
+
+{% block main_content %}
+<div class="container">
+    <h1>Lista de profesionales</h1>
+
+    <ul class="list-group mt-3">
+        {% for profesional in object_list %}
+            <a href="{% url 'profesional_detail' pk=profesional.id %}"
+               class="list-group-item list-group-item-action">
+                {{ profesional }}
+            </a>
+        {% empty %}
+            <p>No existen profesionales.</p>
+        {% endfor %}
+    </ul>
+
+    {% comment %}{# UD3.8b - Componente reutilizable de paginación #}{% endcomment %}
+
+    {% include "common/pagination.html" %}
+
+</div>
+{% endblock main_content %}

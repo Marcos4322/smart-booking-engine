@@ -1,0 +1,22 @@
+
+{% extends "common/base_intranet.html" %}
+
+{% block main_content %}
+<div class="container">
+    <h1>Lista de horarios laborales</h1>
+
+    <ul class="list-group mt-3">
+        {% for horario in object_list %}
+            <a href="{% url 'horariolaboral_detail' pk=horario.id %}"
+               class="list-group-item list-group-item-action">
+                {{ horario }}
+            </a>
+        {% empty %}
+            <p>No existen horarios laborales.</p>
+        {% endfor %}
+    </ul>
+
+    {% include "common/pagination.html" %}
+    
+</div>
+{% endblock main_content %}

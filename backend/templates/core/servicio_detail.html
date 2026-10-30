@@ -1,0 +1,23 @@
+
+{% extends "common/base_intranet.html" %}
+
+{% block main_content %}
+<div class="container">
+    <h1>Detalle del servicio</h1>
+
+    <p><strong>Nombre:</strong> {{ object.nombre }}</p>
+    <p><strong>Descripción:</strong> {{ object.descripcion }}</p>
+    <p><strong>Duración:</strong> {{ object.duracion }}</p>
+    <p><strong>Precio:</strong> {{ object.precio }}</p>
+    <p><strong>Activo:</strong> {{ object.activo }}</p>
+    <p><strong>Profesionales:</strong></p>
+
+    <ul>
+        {% for profesional in object.profesionales.all %}
+            <li>{{ profesional }}</li>
+        {% empty %}
+            <li>No hay profesionales asignados.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock main_content %}

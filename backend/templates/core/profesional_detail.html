@@ -1,0 +1,16 @@
+
+{% extends "common/base_intranet.html" %}
+
+{% comment %}{# UD3.8a - Plantilla de listado de profesionales #}{% endcomment %}
+
+{% block main_content %}
+<div class="container">
+    <h1>Detalle del profesional</h1>
+
+    <p><strong>Nombre:</strong> {{ object.nombre }}</p>
+    <p><strong>Apellidos:</strong> {{ object.apellidos }}</p>
+    <p><strong>Email:</strong> {{ object.email }}</p>
+    <p><strong>Teléfono:</strong> {{ object.telefono }}</p>
+    <p><strong>Activo:</strong> {{ object.activo }}</p>
+</div>
+{% endblock main_content %}

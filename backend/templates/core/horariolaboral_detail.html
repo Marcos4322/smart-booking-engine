@@ -1,0 +1,13 @@
+
+{% extends "common/base_intranet.html" %}
+
+{% block main_content %}
+<div class="container">
+    <h1>Detalle del horario laboral</h1>
+
+    <p><strong>Profesional:</strong> {{ object.profesional }}</p>
+    <p><strong>Día de la semana:</strong> {{ object.dia_semana }}</p>
+    <p><strong>Hora de inicio:</strong> {{ object.hora_inicio }}</p>
+    <p><strong>Hora de fin:</strong> {{ object.hora_fin }}</p>
+</div>
+{% endblock main_content %}

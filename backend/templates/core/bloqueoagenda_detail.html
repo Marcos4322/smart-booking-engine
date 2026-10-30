@@ -1,0 +1,13 @@
+
+{% extends "common/base_intranet.html" %}
+
+{% block main_content %}
+<div class="container">
+    <h1>Detalle del bloqueo de agenda</h1>
+
+    <p><strong>Profesional:</strong> {{ object.profesional }}</p>
+    <p><strong>Fecha de inicio:</strong> {{ object.fecha_inicio }}</p>
+    <p><strong>Fecha de fin:</strong> {{ object.fecha_fin }}</p>
+    <p><strong>Motivo:</strong> {{ object.motivo }}</p>
+</div>
+{% endblock main_content %}
