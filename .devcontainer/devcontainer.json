@@ -1,0 +1,35 @@
+
+{
+    // Nombre del entorno
+    "name": "despliegue",
+
+    // Imagen base: Debian + PHP 8.4 + Composer + Git
+    "image": "mcr.microsoft.com/devcontainers/php:8.4",
+
+    // Desactivamos Xdebug
+    "containerEnv": {
+        "XDEBUG_MODE": "off"
+    },
+
+    // Puerto que se redirige al ordenador
+    "forwardPorts": [8000],
+    "portsAttributes": {
+        "8000": {
+            "label": "Backend Laravel"
+        }
+    },
+
+    // Evita error Git "dubious ownership"
+    "postCreateCommand": "sudo git config --system --add safe.directory '*'",
+
+    // Extensiones de VS Code dentro del contenedor
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "laravel.vscode-laravel",
+                "bmewburn.vscode-intelephense-client",
+                "humao.rest-client"
+            ]
+        }
+    }
+}
