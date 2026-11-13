@@ -1,0 +1,20 @@
+
+@import './tokens.css';
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-family);
+    font-size: var(--font-size-body);
+    background: var(--color-surface);
+    color: var(--color-on-surface);
+}
+
+/* Accesibilidad: foco visible al navegar con teclado */
+:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+}
