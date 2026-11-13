@@ -59,19 +59,12 @@ def get_cobro_5_10():
 
 def create_cliente():
     """14. Crea un cliente con nombre 'Nuevo', apellidos 'apellido1 apellido2', y un NIF válido."""
-    cliente, created = Cliente.objects.get_or_create(
+    return Cliente.objects.create(
         nif="88888888X",
-        defaults={
-            "nombre": "Nuevo",
-            "apellidos": "apellido1 apellido2",
-            "email": "nuevo.cliente@bookflow.com"
-        }
+        nombre= "Nuevo",
+        apellidos= "apellido1 apellido2",
+        email= "nuevo.cliente@bookflow.com"
     )
-    if not created:
-        cliente.nombre = "Nuevo"
-        cliente.apellidos = "apellido1 apellido2"
-        cliente.save()
-    return cliente
 
 def create_factura():
     """15. Crea una nueva factura para el cliente del ejercicio anterior, fecha ayer e importe 100."""

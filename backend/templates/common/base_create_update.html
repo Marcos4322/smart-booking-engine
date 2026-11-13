@@ -1,0 +1,29 @@
+{% comment %}{# UD4.2c - Plantilla común para creación y actualización #}{% endcomment %}
+
+{% extends 'common/base_intranet.html' %}
+{% load crispy_forms_tags %}
+
+{% block main_content %}
+<div class="container">
+    {% if object %}
+        <h2>{{ titulo_actualizacion }}</h2>
+    {% else %}
+        <h2>{{ titulo_creacion }}</h2>
+    {% endif %}
+
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {% crispy form %}
+
+        <input type="submit" class="btn btn-success mr-2"
+               value="{% if object %}Actualizar{% else %}Crear{% endif %}">
+
+        {% if object and url_borrado %}
+            <a class="btn btn-danger" role="button"
+               href="{% url url_borrado object.id %}">
+                Eliminar
+            </a>
+        {% endif %}
+    </form>
+</div>
+{% endblock main_content %}

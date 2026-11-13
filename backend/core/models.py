@@ -116,14 +116,6 @@ class Reserva(models.Model):
     fecha_fin = models.DateTimeField(verbose_name="Fin de la reserva")
     estado = models.CharField(max_length=20, choices=ESTADOS, default="pendiente", verbose_name="Estado")
     
-    # # UD3.3c - Restricción de clave única en token_qr
-    token_qr = models.PositiveIntegerField(
-        unique=True,
-        blank=True,
-        null=True,
-        editable=False,
-        verbose_name="ID de validación QR"
-    )
     validada = models.BooleanField(default=False, verbose_name="Reserva validada")
     fecha_creacion = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
 
@@ -137,12 +129,6 @@ class Reserva(models.Model):
     # # UD3.3b - Representación textual del modelo Reserva
     def __str__(self):
         return f"{str(self.cliente)} - {str(self.fecha_inicio)}"
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        if not self.token_qr:
-            self.token_qr = self.id
-            super().save(update_fields=['token_qr'])
 
 
 # Modelo BloqueoAgenda
