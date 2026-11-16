@@ -1,0 +1,15 @@
+{% extends 'common/base_intranet.html' %}
+{% comment %}{# UD4.2e - Plantilla común para confirmación de borrado #}{% endcomment %}
+
+{% block main_content %}
+<div class="container">
+    <h2>{{ titulo }}</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <p>{{ mensaje_confirmación }}</p>
+        {{ form }}
+        <input type="submit" value="Confirmar" class="btn btn-danger" />
+    </form>
+</div>
+{% endblock main_content %}
