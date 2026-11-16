@@ -1,6 +1,7 @@
 from django.views.generic import CreateView, DeleteView, ListView, DetailView, UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
 from common.mixins import CreateUpdateContextMixin, CoreValidationMixin
+from .forms import ProfesionalForm, ServicioForm, HorarioLaboralForm, ReservaForm, BloqueoAgendaForm
 
 from .models import (
     Profesional,
@@ -139,6 +140,7 @@ class BloqueoAgendaDetailView(DetailView):
 
 class ProfesionalCreateView(SuccessMessageMixin, CreateUpdateContextMixin, CreateView):
     model = Profesional
+    form_class = ProfesionalForm
     template_name = 'base_create_update.html'
     success_url = 'profesional_list'
 
@@ -151,6 +153,7 @@ class ProfesionalCreateView(SuccessMessageMixin, CreateUpdateContextMixin, Creat
 
 class ProfesionalUpdateView(SuccessMessageMixin, CreateUpdateContextMixin, UpdateView):
     model = Profesional
+    form_class = ProfesionalForm
     template_name = 'base_create_update.html'
     success_url = 'profesional_list'
 
@@ -178,6 +181,7 @@ class ProfesionalDeleteView(DeleteView):
 
 class ServicioCreateView(SuccessMessageMixin, CreateUpdateContextMixin, CreateView):
     model = Servicio
+    form_class = ServicioForm
     template_name = 'base_create_update.html'
     success_url = 'servicio_list'
 
@@ -190,6 +194,7 @@ class ServicioCreateView(SuccessMessageMixin, CreateUpdateContextMixin, CreateVi
 
 class ServicioUpdateView(SuccessMessageMixin, CreateUpdateContextMixin, UpdateView):
     model = Servicio
+    form_class = ServicioForm
     template_name = 'base_create_update.html'
     success_url = 'servicio_list'
 
@@ -217,6 +222,7 @@ class ServicioDeleteView(DeleteView):
 
 class HorarioLaboralCreateView(CoreValidationMixin, SuccessMessageMixin, CreateUpdateContextMixin, CreateView):
     model = HorarioLaboral
+    form_class = HorarioLaboralForm
     template_name = 'base_create_update.html'
     success_url = 'horariolaboral_list'
 
@@ -230,6 +236,7 @@ class HorarioLaboralCreateView(CoreValidationMixin, SuccessMessageMixin, CreateU
 
 class HorarioLaboralUpdateView(CoreValidationMixin, SuccessMessageMixin, CreateUpdateContextMixin, UpdateView):
     model = HorarioLaboral
+    form_class = HorarioLaboralForm
     template_name = 'base_create_update.html'
     success_url = 'horariolaboral_list'
 
@@ -257,6 +264,7 @@ class HorarioLaboralDeleteView(DeleteView):
 
 class ReservaCreateView(CoreValidationMixin, SuccessMessageMixin, CreateUpdateContextMixin, CreateView):
     model = Reserva
+    form_class = ReservaForm
     template_name = 'base_create_update.html'
     success_url = 'reserva_list'
 
@@ -270,6 +278,7 @@ class ReservaCreateView(CoreValidationMixin, SuccessMessageMixin, CreateUpdateCo
 
 class ReservaUpdateView(CoreValidationMixin, SuccessMessageMixin, CreateUpdateContextMixin, UpdateView):
     model = Reserva
+    form_class = ReservaForm
     template_name = 'base_create_update.html'
     success_url = 'reserva_list'
 
@@ -297,6 +306,7 @@ class ReservaDeleteView(DeleteView):
 
 class BloqueoAgendaCreateView(CoreValidationMixin, SuccessMessageMixin, CreateUpdateContextMixin, CreateView):
     model = BloqueoAgenda
+    form_class = BloqueoAgendaForm
     template_name = 'base_create_update.html'
     success_url = 'bloqueoagenda_list'
 
@@ -310,6 +320,7 @@ class BloqueoAgendaCreateView(CoreValidationMixin, SuccessMessageMixin, CreateUp
 
 class BloqueoAgendaUpdateView(CoreValidationMixin, SuccessMessageMixin, CreateUpdateContextMixin, UpdateView):
     model = BloqueoAgenda
+    form_class = BloqueoAgendaForm
     template_name = 'base_create_update.html'
     success_url = 'bloqueoagenda_list'
 

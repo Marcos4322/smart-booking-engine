@@ -3,6 +3,7 @@ from django.views.generic import CreateView, DeleteView, ListView, DetailView, U
 from common.mixins import CreateUpdateContextMixin, DeleteDependencyMixin, CobroMixin
 from billing.models import Cliente, Factura, Cobro
 from django.contrib import messages
+from .forms import ClienteForm, FacturaForm, CobroForm
 
 # UD3.8.b - Listado de clientes con paginación
 
@@ -78,6 +79,7 @@ class CobroDetailView(DetailView):
 # UD4.4a - Mensajes de éxito en las vistas de creación y actualización
 class ClienteCreateView(CreateUpdateContextMixin, CreateView):
     model = Cliente
+    form_class = ClienteForm
     template_name = 'base_create_update.html'
     success_url = 'cliente_update'
 
@@ -87,9 +89,9 @@ class ClienteCreateView(CreateUpdateContextMixin, CreateView):
 
     success_message = "Cliente creado correctamente"
 
-
 class ClienteUpdateView(CreateUpdateContextMixin, UpdateView):
     model = Cliente
+    form_class = ClienteForm
     template_name = 'base_create_update.html'
     success_url = 'cliente_update'
 
@@ -116,6 +118,7 @@ class ClienteDeleteView(DeleteDependencyMixin, DeleteView):
 # UD4.4a - Mensajes de éxito en las vistas de creación y actualización
 class FacturaCreateView(CreateUpdateContextMixin, CreateView):
     model = Factura
+    form_class = FacturaForm
     template_name = 'base_create_update.html'
     success_url = 'factura_update'
 
@@ -128,6 +131,7 @@ class FacturaCreateView(CreateUpdateContextMixin, CreateView):
 
 class FacturaUpdateView(CreateUpdateContextMixin, UpdateView):
     model = Factura
+    form_class = FacturaForm
     template_name = 'base_create_update.html'
     success_url = 'factura_update'
 
@@ -153,6 +157,7 @@ class FacturaDeleteView(DeleteDependencyMixin,DeleteView):
 # UD4.4a - Mensajes de éxito en las vistas de creación y actualización
 class CobroCreateView(CobroMixin, CreateUpdateContextMixin, CreateView):
     model = Cobro
+    form_class = CobroForm
     template_name = 'base_create_update.html'
     success_url = 'cobro_update'
 
@@ -165,6 +170,7 @@ class CobroCreateView(CobroMixin, CreateUpdateContextMixin, CreateView):
 
 class CobroUpdateView(CobroMixin, CreateUpdateContextMixin, UpdateView):
     model = Cobro
+    form_class = CobroForm
     template_name = 'base_create_update.html'
     success_url = 'cobro_update'
 

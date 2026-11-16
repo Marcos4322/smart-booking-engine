@@ -59,16 +59,17 @@ class CobroMixin:
         return super().form_valid(form)
 
 
-# UD4.2h - Mixin para validar horarios y fechas del proyecto
 
+# UD4.2h - Mixin para validar horarios y fechas del proyecto
 class CoreValidationMixin:
     """Mixin que valida los horarios laborales y las fechas de inicio y fin."""
+
     def form_valid(self, form):
-        objeto = form.instance
+        datos = form.cleaned_data
 
         # Validación de HorarioLaboral
-        if hasattr(objeto, 'hora_inicio') and hasattr(objeto, 'hora_fin'):
-            if objeto.hora_fin <= objeto.hora_inicio:
+        if 'hora_inicio' in datos and 'hora_fin' in datos:
+            if datos['hora_fin'] <= datos['hora_inicio']:
                 messages.error(
                     self.request,
                     "La hora de fin debe ser posterior a la hora de inicio."
@@ -76,8 +77,8 @@ class CoreValidationMixin:
                 return super().form_invalid(form)
 
         # Validación de Reserva y BloqueoAgenda
-        if hasattr(objeto, 'fecha_inicio') and hasattr(objeto, 'fecha_fin'):
-            if objeto.fecha_fin <= objeto.fecha_inicio:
+        if 'fecha_inicio' in datos and 'fecha_fin' in datos:
+            if datos['fecha_fin'] <= datos['fecha_inicio']:
                 messages.error(
                     self.request,
                     "La fecha de fin debe ser posterior a la fecha de inicio."
