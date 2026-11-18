@@ -3,11 +3,11 @@
 
 {% block main_content %}
 <div class="container">
-    <h2>{{ titulo }}</h2>
+    <h2>{{ view.titulo }}</h2>
 
     <form method="post">
         {% csrf_token %}
-        <p>{{ mensaje_confirmación }}</p>
+        <p>{{ view.mensaje_confirmación }}</p>
         {{ form }}
         <input type="submit" value="Confirmar" class="btn btn-danger" />
     </form>

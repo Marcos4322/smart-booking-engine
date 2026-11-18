@@ -1,7 +1,9 @@
+
 from django.views.generic import CreateView, DeleteView, ListView, DetailView, UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
 from common.mixins import CreateUpdateContextMixin, CoreValidationMixin
 from .forms import ProfesionalForm, ServicioForm, HorarioLaboralForm, ReservaForm, BloqueoAgendaForm
+from django.urls import reverse_lazy
 
 from .models import (
     Profesional,
@@ -31,6 +33,7 @@ class ProfesionalListView(ListView):
             queryset = queryset.order_by('-id')
 
         return queryset
+
 
 class ProfesionalDetailView(DetailView):
     model = Profesional
@@ -81,6 +84,7 @@ class HorarioLaboralListView(ListView):
 
         return queryset
 
+
 class HorarioLaboralDetailView(DetailView):
     model = HorarioLaboral
     template_name = 'core/horariolaboral_detail.html'
@@ -104,6 +108,7 @@ class ReservaListView(ListView):
             queryset = queryset.order_by('-id')
 
         return queryset
+
 
 class ReservaDetailView(DetailView):
     model = Reserva
@@ -129,6 +134,7 @@ class BloqueoAgendaListView(ListView):
 
         return queryset
 
+
 class BloqueoAgendaDetailView(DetailView):
     model = BloqueoAgenda
     template_name = 'core/bloqueoagenda_detail.html'
@@ -141,35 +147,45 @@ class BloqueoAgendaDetailView(DetailView):
 class ProfesionalCreateView(SuccessMessageMixin, CreateUpdateContextMixin, CreateView):
     model = Profesional
     form_class = ProfesionalForm
-    template_name = 'base_create_update.html'
-    success_url = 'profesional_list'
+    template_name = 'common/base_create_update.html'
 
     titulo_creacion = 'Crear profesional'
     titulo_actualizacion = None
     url_borrado = None
 
-    success_message = "Profesional creado correctamente"
+    # UD4.4a - Mensaje de éxito con la representación textual del profesional
+    def get_success_message(self, cleaned_data):
+        return "Profesional '{}' creado correctamente".format(str(self.object))
+
+    # UD4.2a - Redirección al formulario de actualización del profesional creado
+    def get_success_url(self):
+        return reverse_lazy('profesional_update', kwargs={'pk': self.object.pk})
 
 
 class ProfesionalUpdateView(SuccessMessageMixin, CreateUpdateContextMixin, UpdateView):
     model = Profesional
     form_class = ProfesionalForm
-    template_name = 'base_create_update.html'
-    success_url = 'profesional_list'
+    template_name = 'common/base_create_update.html'
 
     titulo_creacion = None
     titulo_actualizacion = 'Actualizar profesional'
     url_borrado = 'profesional_delete'
 
-    success_message = "Profesional actualizado correctamente"
+    # UD4.4a - Mensaje de éxito con la representación textual del profesional
+    def get_success_message(self, cleaned_data):
+        return "Profesional '{}' actualizado correctamente".format(str(self.object))
+
+    # UD4.2a - Redirección al formulario de actualización del profesional
+    def get_success_url(self):
+        return reverse_lazy('profesional_update', kwargs={'pk': self.object.pk})
 
 
 # UD4.2e - Variables de contexto para eliminar Profesional
 
 class ProfesionalDeleteView(DeleteView):
     model = Profesional
-    template_name = 'base_confirm_delete.html'
-    success_url = 'profesional_list'
+    template_name = 'common/base_confirm_delete.html'
+    success_url = reverse_lazy('profesional_list')
 
     titulo = 'Eliminar profesional'
     mensaje_confirmación = '¿Está seguro de que desea eliminar este profesional?'
@@ -182,35 +198,45 @@ class ProfesionalDeleteView(DeleteView):
 class ServicioCreateView(SuccessMessageMixin, CreateUpdateContextMixin, CreateView):
     model = Servicio
     form_class = ServicioForm
-    template_name = 'base_create_update.html'
-    success_url = 'servicio_list'
+    template_name = 'common/base_create_update.html'
 
     titulo_creacion = 'Crear servicio'
     titulo_actualizacion = None
     url_borrado = None
 
-    success_message = "Servicio creado correctamente"
+    # UD4.4a - Mensaje de éxito con la representación textual del servicio
+    def get_success_message(self, cleaned_data):
+        return "Servicio '{}' creado correctamente".format(str(self.object))
+
+    # UD4.2a - Redirección al formulario de actualización del servicio creado
+    def get_success_url(self):
+        return reverse_lazy('servicio_update', kwargs={'pk': self.object.pk})
 
 
 class ServicioUpdateView(SuccessMessageMixin, CreateUpdateContextMixin, UpdateView):
     model = Servicio
     form_class = ServicioForm
-    template_name = 'base_create_update.html'
-    success_url = 'servicio_list'
+    template_name = 'common/base_create_update.html'
 
     titulo_creacion = None
     titulo_actualizacion = 'Actualizar servicio'
     url_borrado = 'servicio_delete'
 
-    success_message = "Servicio actualizado correctamente"
+    # UD4.4a - Mensaje de éxito con la representación textual del servicio
+    def get_success_message(self, cleaned_data):
+        return "Servicio '{}' actualizado correctamente".format(str(self.object))
+
+    # UD4.2a - Redirección al formulario de actualización del servicio
+    def get_success_url(self):
+        return reverse_lazy('servicio_update', kwargs={'pk': self.object.pk})
 
 
 # UD4.2e - Variables de contexto para eliminar Servicio
 
 class ServicioDeleteView(DeleteView):
     model = Servicio
-    template_name = 'base_confirm_delete.html'
-    success_url = 'servicio_list'
+    template_name = 'common/base_confirm_delete.html'
+    success_url = reverse_lazy('servicio_list')
 
     titulo = 'Eliminar servicio'
     mensaje_confirmación = '¿Está seguro de que desea eliminar este servicio?'
@@ -223,36 +249,45 @@ class ServicioDeleteView(DeleteView):
 class HorarioLaboralCreateView(CoreValidationMixin, SuccessMessageMixin, CreateUpdateContextMixin, CreateView):
     model = HorarioLaboral
     form_class = HorarioLaboralForm
-    template_name = 'base_create_update.html'
-    success_url = 'horariolaboral_list'
+    template_name = 'common/base_create_update.html'
 
     titulo_creacion = 'Crear horario laboral'
     titulo_actualizacion = None
     url_borrado = None
 
-    success_message = "Horario laboral creado correctamente"
+    # UD4.4a - Mensaje de éxito con la representación textual del horario laboral
+    def get_success_message(self, cleaned_data):
+        return "Horario laboral '{}' creado correctamente".format(str(self.object))
 
+    # UD4.2a - Redirección al formulario de actualización del horario laboral creado
+    def get_success_url(self):
+        return reverse_lazy('horariolaboral_update', kwargs={'pk': self.object.pk})
 
 
 class HorarioLaboralUpdateView(CoreValidationMixin, SuccessMessageMixin, CreateUpdateContextMixin, UpdateView):
     model = HorarioLaboral
     form_class = HorarioLaboralForm
-    template_name = 'base_create_update.html'
-    success_url = 'horariolaboral_list'
+    template_name = 'common/base_create_update.html'
 
     titulo_creacion = None
     titulo_actualizacion = 'Actualizar horario laboral'
     url_borrado = 'horariolaboral_delete'
 
-    success_message = "Horario laboral actualizado correctamente"
+    # UD4.4a - Mensaje de éxito con la representación textual del horario laboral
+    def get_success_message(self, cleaned_data):
+        return "Horario laboral '{}' actualizado correctamente".format(str(self.object))
+
+    # UD4.2a - Redirección al formulario de actualización del horario laboral
+    def get_success_url(self):
+        return reverse_lazy('horariolaboral_update', kwargs={'pk': self.object.pk})
 
 
 # UD4.2e - Variables de contexto para eliminar HorarioLaboral
 
 class HorarioLaboralDeleteView(DeleteView):
     model = HorarioLaboral
-    template_name = 'base_confirm_delete.html'
-    success_url = 'horariolaboral_list'
+    template_name = 'common/base_confirm_delete.html'
+    success_url = reverse_lazy('horariolaboral_list')
 
     titulo = 'Eliminar horario laboral'
     mensaje_confirmación = '¿Está seguro de que desea eliminar este horario laboral?'
@@ -265,36 +300,45 @@ class HorarioLaboralDeleteView(DeleteView):
 class ReservaCreateView(CoreValidationMixin, SuccessMessageMixin, CreateUpdateContextMixin, CreateView):
     model = Reserva
     form_class = ReservaForm
-    template_name = 'base_create_update.html'
-    success_url = 'reserva_list'
+    template_name = 'common/base_create_update.html'
 
     titulo_creacion = 'Crear reserva'
     titulo_actualizacion = None
     url_borrado = None
 
-    success_message = "Reserva creada correctamente"
+    # UD4.4a - Mensaje de éxito con la representación textual de la reserva
+    def get_success_message(self, cleaned_data):
+        return "Reserva '{}' creada correctamente".format(str(self.object))
 
+    # UD4.2a - Redirección al formulario de actualización de la reserva creada
+    def get_success_url(self):
+        return reverse_lazy('reserva_update', kwargs={'pk': self.object.pk})
 
 
 class ReservaUpdateView(CoreValidationMixin, SuccessMessageMixin, CreateUpdateContextMixin, UpdateView):
     model = Reserva
     form_class = ReservaForm
-    template_name = 'base_create_update.html'
-    success_url = 'reserva_list'
+    template_name = 'common/base_create_update.html'
 
     titulo_creacion = None
     titulo_actualizacion = 'Actualizar reserva'
     url_borrado = 'reserva_delete'
 
-    success_message = "Reserva actualizada correctamente"
+    # UD4.4a - Mensaje de éxito con la representación textual de la reserva
+    def get_success_message(self, cleaned_data):
+        return "Reserva '{}' actualizada correctamente".format(str(self.object))
+
+    # UD4.2a - Redirección al formulario de actualización de la reserva
+    def get_success_url(self):
+        return reverse_lazy('reserva_update', kwargs={'pk': self.object.pk})
 
 
 # UD4.2e - Variables de contexto para eliminar Reserva
 
 class ReservaDeleteView(DeleteView):
     model = Reserva
-    template_name = 'base_confirm_delete.html'
-    success_url = 'reserva_list'
+    template_name = 'common/base_confirm_delete.html'
+    success_url = reverse_lazy('reserva_list')
 
     titulo = 'Eliminar reserva'
     mensaje_confirmación = '¿Está seguro de que desea eliminar esta reserva?'
@@ -307,36 +351,45 @@ class ReservaDeleteView(DeleteView):
 class BloqueoAgendaCreateView(CoreValidationMixin, SuccessMessageMixin, CreateUpdateContextMixin, CreateView):
     model = BloqueoAgenda
     form_class = BloqueoAgendaForm
-    template_name = 'base_create_update.html'
-    success_url = 'bloqueoagenda_list'
+    template_name = 'common/base_create_update.html'
 
     titulo_creacion = 'Crear bloqueo de agenda'
     titulo_actualizacion = None
     url_borrado = None
 
-    success_message = "Bloqueo de agenda creado correctamente"
+    # UD4.4a - Mensaje de éxito con la representación textual del bloqueo de agenda
+    def get_success_message(self, cleaned_data):
+        return "Bloqueo de agenda '{}' creado correctamente".format(str(self.object))
 
+    # UD4.2a - Redirección al formulario de actualización del bloqueo de agenda creado
+    def get_success_url(self):
+        return reverse_lazy('bloqueoagenda_update', kwargs={'pk': self.object.pk})
 
 
 class BloqueoAgendaUpdateView(CoreValidationMixin, SuccessMessageMixin, CreateUpdateContextMixin, UpdateView):
     model = BloqueoAgenda
     form_class = BloqueoAgendaForm
-    template_name = 'base_create_update.html'
-    success_url = 'bloqueoagenda_list'
+    template_name = 'common/base_create_update.html'
 
     titulo_creacion = None
     titulo_actualizacion = 'Actualizar bloqueo de agenda'
     url_borrado = 'bloqueoagenda_delete'
 
-    success_message = "Bloqueo de agenda actualizado correctamente"
+    # UD4.4a - Mensaje de éxito con la representación textual del bloqueo de agenda
+    def get_success_message(self, cleaned_data):
+        return "Bloqueo de agenda '{}' actualizado correctamente".format(str(self.object))
+
+    # UD4.2a - Redirección al formulario de actualización del bloqueo de agenda
+    def get_success_url(self):
+        return reverse_lazy('bloqueoagenda_update', kwargs={'pk': self.object.pk})
 
 
 # UD4.2e - Variables de contexto para eliminar BloqueoAgenda
 
 class BloqueoAgendaDeleteView(DeleteView):
     model = BloqueoAgenda
-    template_name = 'base_confirm_delete.html'
-    success_url = 'bloqueoagenda_list'
+    template_name = 'common/base_confirm_delete.html'
+    success_url = reverse_lazy('bloqueoagenda_list')
 
     titulo = 'Eliminar bloqueo de agenda'
     mensaje_confirmación = '¿Está seguro de que desea eliminar este bloqueo de agenda?'
