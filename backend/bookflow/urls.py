@@ -27,6 +27,9 @@ urlpatterns = [
     path('', include('common.urls')),
     path('core/', include('core.urls')),
     path('billing/', include('billing.urls')),
+    
+    # UD5.2.b - Rutas de autenticación
+    path('login/', include('login.urls')),
 ]
 
 # UD3.2e        

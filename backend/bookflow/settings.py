@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 # UD3.2f - aplicaciones instaladas
+# UD5.1a - Aplicación de usuarios
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -46,6 +47,8 @@ INSTALLED_APPS = [
     'billing',
     'crispy_forms',
     'crispy_bootstrap5',
+    'usuarios',
+    'login',
 ]
 
 MIDDLEWARE = [
@@ -133,6 +136,9 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# UD5.1b - Modelo de usuario personalizado
+AUTH_USER_MODEL = 'usuarios.MyUser'
+
 # UD3.2d
 
 STATIC_URL = 'static/'
@@ -151,3 +157,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 MESSAGE_TAGS = {
     message_constants.ERROR: 'danger',
 }
+
+# UD5.2.b - Redirección después de iniciar sesión
+# Fuente: vídeo del profesor UD5.2.
+LOGIN_REDIRECT_URL = 'panel'

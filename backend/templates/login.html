@@ -1,0 +1,45 @@
+
+{% extends 'common/base.html' %}
+
+{% block content %}
+<!-- UD5.2.b - Pantalla de inicio de sesión -->
+<!-- Fuente: vídeo del profesor UD5.2 -->
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+
+            <div class="card shadow">
+                <div class="card-body">
+
+                    <h2 class="text-center mb-4">
+                        {{ title }}
+                    </h2>
+
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label class="form-label">Usuario</label>
+                            {{ form.username }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Contraseña</label>
+                            {{ form.password }}
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">
+                            Iniciar sesión
+                        </button>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

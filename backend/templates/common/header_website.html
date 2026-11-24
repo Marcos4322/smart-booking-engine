@@ -5,8 +5,27 @@
   <a class="navbar-brand col-md-3 col-lg-2 px-3 ml-5" href="#">BookFlow</a>
 
   <div class="navbar-nav">
-    <div class="nav-item text-nowrap">
-      <a class="nav-link px-3" href="#">Log in</a>
-    </div>
+  <div class="nav-item text-nowrap">
+
+    {% if user.is_authenticated %}
+
+      <!-- UD5.2.c - Botón para cerrar sesión -->
+      <!-- Fuente: adaptación propia para poder cerrar sesión -->
+      <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="nav-link px-3 btn btn-link">
+          Cerrar sesión
+        </button>
+      </form>
+
+    {% else %}
+
+      <!-- UD5.2.b - Enlace para iniciar sesión -->
+      <!-- Fuente: implementación anterior del Login de UD5.2. -->
+      <a class="nav-link px-3" href="{% url 'login' %}">Iniciar sesión</a>
+
+    {% endif %}
+
   </div>
+</div>
 </header>
